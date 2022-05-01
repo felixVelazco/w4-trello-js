@@ -9,5 +9,10 @@ module.exports = {
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-unused-vars": "off",
+        indent: ["error", 2],
+        "linebreak-style": ["error", "windows"],
+        quotes: ["error", "double"],
+        semi: ["error", "always"]
     }
 }
