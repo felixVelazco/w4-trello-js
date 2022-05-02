@@ -34,13 +34,29 @@ let listId;
 let listsPromise = trello.getListsOnBoard("626dea5a90d6d6789af81916", "Ver listas en board");
 listsPromise.then((list) => {
   listId = list[0];
-  createNewCard(`Nueva tarjeta ${new Date()}`, "Aqui va la descripcion", list[0].id)
+  getCardsId(listId.id);
+  // createNewCard(`Nueva tarjeta ${new Date()}`, "Aqui va la descripcion", list[0].id)
   console.log(listId.id);  
 })
+
+function getCardsId(listId){
+  let cardsLists = trello.getCardsForList(listId);
+  cardsLists.then((list) => {
+    updateCard(list[0].id, "name", "Nuevo nombre de card");
+  })
+}
 
 function createNewCard(nameCard, description, listId){
   let createCard = trello.addCard(nameCard, description, listId);
   createCard.then((card) => {
     console.log("nueva Card creada!");
+  })
+}
+
+function updateCard(cardId, field, value){
+  let changeCard = trello.updateCard(cardId,field,value);
+  changeCard.then((card) => {
+    console.log(`Atributo ${field} fue cambiado con exito`);
+    
   })
 }
